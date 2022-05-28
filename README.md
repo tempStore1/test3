@@ -2,6 +2,9 @@
 
 > 剛剛建立自己的 Starter Kit，沒有實際運用過，所以應該之後還會補東西進來。
 
+> **Warning**  
+> clone 下來請先使用 `git remote remove origin` 刪除遠端連結。
+
 ## Features
 
 - 使用 React 18 以上
