@@ -34,7 +34,12 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    modules: [path.resolve(__dirname, "./src"), "node_modules"],
+    // webpack.config 和 tsconfig.json 都要設定
+    alias: {
+      "~~components": path.resolve(__dirname, "src/components/"),
+    },
   },
   devtool: "inline-source-map",
   plugins: [

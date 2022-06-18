@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import App from "./Components/App";
+import App from "./App";
 import "./CSS/css_reset.css";
 
 // ===============================================================
