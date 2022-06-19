@@ -1,6 +1,10 @@
 import { ts } from "~~components";
 const App: React.FC = () => {
-  return <div>Hello World</div>;
+  return (
+    <div className="starterkit-container starterkit-text-center">
+      Hello World
+    </div>
+  );
 };
 
 ts();

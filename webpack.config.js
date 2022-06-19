@@ -19,17 +19,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-      {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.(png|jpg|gif)$i/,
         type: "asset/resource",
+      },
+      {
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
+        use: {
+          loader: "babel-loader",
+        },
+        exclude: /node_modules/,
       },
     ],
   },
@@ -39,6 +41,7 @@ module.exports = {
     // webpack.config 和 tsconfig.json 都要設定
     alias: {
       "~~components": path.resolve(__dirname, "src/components/"),
+      "~~assets": path.resolve(__dirname, "src/assets"),
     },
   },
   devtool: "inline-source-map",
