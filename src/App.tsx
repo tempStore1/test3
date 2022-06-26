@@ -1,4 +1,5 @@
-import { ts } from "@/components/test";
+import { useState, useEffect } from "react";
+
 const App: React.FC = () => {
   return (
     <div className="starterkit-container starterkit-text-center">
@@ -6,7 +7,5 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-ts();
 
 export default App;
