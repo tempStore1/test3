@@ -1,4 +1,4 @@
-import { ts } from "~~components";
+import { ts } from "@/components/test";
 const App: React.FC = () => {
   return (
     <div className="starterkit-container starterkit-text-center">

@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -36,13 +37,9 @@ module.exports = {
     ],
   },
   resolve: {
+    plugins: [new TsconfigPathsPlugin()],
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     modules: [path.resolve(__dirname, "./src"), "node_modules"],
-    // webpack.config 和 tsconfig.json 都要設定
-    alias: {
-      "~~components": path.resolve(__dirname, "src/components/"),
-      "~~assets": path.resolve(__dirname, "src/assets"),
-    },
   },
   devtool: "inline-source-map",
   plugins: [
