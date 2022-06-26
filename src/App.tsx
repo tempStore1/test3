@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 const App: React.FC = () => {
   const [resource, serResource] = useState({});
 
-  function getRandomData() {
+  const getRandomData = () => {
     return ApiService.get("https://api.waifu.im/random");
-  }
+  };
 
   useEffect(() => {
-    const res = getRandomData();
-    serResource(res);
+    getRandomData().then((res: any) => {
+      serResource(res);
+    });
   }, []);
 
   useEffect(() => {

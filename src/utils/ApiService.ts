@@ -1,5 +1,5 @@
 interface ApiService {
-  get: (url: string) => unknown;
+  get: (url: string) => any;
 }
 
 export const ApiService: ApiService = {
@@ -7,7 +7,6 @@ export const ApiService: ApiService = {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
       return data;
     } catch (err) {
       console.log("error", err);
