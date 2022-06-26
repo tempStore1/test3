@@ -1,5 +1,22 @@
 import { ts } from "@/components/test";
+import { ApiService } from "@/utils/ApiService";
+import { useState, useEffect } from "react";
 const App: React.FC = () => {
+  const [resource, serResource] = useState({});
+
+  function getRandomData() {
+    return ApiService.get("https://api.waifu.im/random");
+  }
+
+  useEffect(() => {
+    const res = getRandomData();
+    serResource(res);
+  }, []);
+
+  useEffect(() => {
+    console.log("resource", resource);
+  }, [resource]);
+
   return (
     <div className="starterkit-container starterkit-text-center">
       Hello World
