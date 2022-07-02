@@ -6,9 +6,8 @@ const App: React.FC = () => {
   return (
     <div className="demo-relative demo-w-full demo-text-white demo-h-screen  demo-bg-slate-700">
       <div className="demo-absolute demo-top-1/2 demo-left-1/2 demo--translate-y-1/2 demo--translate-x-1/2 demo-w-[1024px]">
-        <div className="demo-container demo-p-4 demo-border demo-shadow  demo-mx-auto demo-rounded demo-text-center">
-          <h1 className="demo-text-2xl">Hello World</h1>
-          <p>This is a sample Starter Kit !</p>
+        <div className="demo-container demo-p-4 demo-mx-auto demo-text-center">
+          <h1 className="demo-text-4xl">This is a sample Starter Kit !</h1>
         </div>
         <div className="demo-mx-auto demo-text-center demo-mt-5">
           <a
