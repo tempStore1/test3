@@ -1,5 +1,4 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
@@ -10,6 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.[hash].js",
+    clean: true,
   },
   devServer: {
     static: {
@@ -49,6 +49,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "main.[hash].css",
     }),
-    new CleanWebpackPlugin(),
   ],
 };
