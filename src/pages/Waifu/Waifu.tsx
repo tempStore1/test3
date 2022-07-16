@@ -2,32 +2,38 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { brands, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { Link } from "react-router-dom";
-import * as React from "react";
+import { useDispatch } from "react-redux";
+import * as WaifuAction from "./WaifuAction";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { initStateType } from "./WaifuReducer";
 
-const Home: React.FC = () => {
+const Waifu: React.FC = (props: any) => {
+  const dispatch = useDispatch();
+  const { test, getWaifuInfo } = props;
+
+  useEffect(() => {
+    getWaifuInfo();
+  }, []);
+
   return (
     <div className="demo-relative demo-w-full demo-text-white demo-h-screen  demo-bg-slate-700">
       <div className="demo-absolute demo-top-1/2 demo-left-1/2 demo--translate-y-1/2 demo--translate-x-1/2 demo-w-[1024px]">
         <div className="demo-container demo-p-4 demo-mx-auto demo-text-center">
-          <h1 className="demo-text-4xl">This is a sample Starter Kit !</h1>
+          <h1 className="demo-text-4xl">彼女は俺の嫁が！</h1>
         </div>
         <div className="demo-mx-auto demo-text-center demo-mt-5">
-          <a
-            target="_blank"
-            href="https://github.com/BardKidd/base-starter-kit"
-            className="demo-border demo-inline-block  demo-rounded demo-p-3 demo-bg-white demo-cursor-pointer demo-ease-in-out demo-duration-150 hover:demo-ring-4	"
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(test());
+            }}
           >
-            <FontAwesomeIcon
-              icon={brands("github")}
-              className="demo-text-slate-700 demo-pr-2 demo-text-2xl"
-            />
-            <button
-              type="button"
-              className="demo-text-slate-700 demo-font-bold demo-text-2xl"
-            >
-              GitHub
-            </button>
-          </a>
+            可以發 Action
+          </button>
+        </div>
+        <div className="demo-mx-auto demo-text-center demo-mt-5">
+          <img src="#" alt="" />
         </div>
         <div className="demo-mx-auto demo-mt-5 demo-flex  demo-items-center demo-justify-center">
           <Link
@@ -46,4 +52,13 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state: initStateType) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  test: WaifuAction.test,
+  getWaifuInfo: WaifuAction.getWaifuInfo,
+};
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Waifu);
