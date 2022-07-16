@@ -1,16 +1,11 @@
-import { actionCreator as actions, test } from "./WaifuAction";
+import { actionCreator as actions } from "./WaifuAction";
+import { handleActions } from "redux-actions";
 
 // 初始資料格式
-type initStateType = {
+export type initStateType = {
   tag?: string;
   test?: string;
   waifuInfo: object;
-};
-
-// action 格式
-type actionType = {
-  type: string;
-  payload?: object;
 };
 
 const initState: initStateType = {
@@ -19,17 +14,20 @@ const initState: initStateType = {
   waifuInfo: {},
 };
 
-const WaifuReducer = (state = initState, action: actionType) => {
-  switch (action.type) {
-    case actions.TEST: {
+export default handleActions(
+  {
+    [actions.TEST]: (state) => {
       return {
         ...state,
         test: "發送 action 成功",
       };
-    }
-    default:
-      return state;
-  }
-};
-
-export default WaifuReducer;
+    },
+    [actions.GET___WAIFU_INFO_SUCCESS]: (state, payload) => {
+      return {
+        ...state,
+        waifuInfo: payload.waifuInfo,
+      };
+    },
+  },
+  initState
+);
