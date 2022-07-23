@@ -1,4 +1,4 @@
 import configureStore from "./configureStore";
-import { createHashHistory } from "history";
-export const history = createHashHistory();
+import { createBrowserHistory } from "history";
+export const history = createBrowserHistory();
 export const store = configureStore(history);
