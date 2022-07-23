@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "index.[hash].js",
     // 打包後使用 BrowserRouter 才不會掛掉
-    publicPath: "/",
+    publicPath: "./",
     clean: true,
   },
   devServer: {
