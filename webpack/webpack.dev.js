@@ -4,15 +4,17 @@ const Dotenv = require("dotenv-webpack");
 const modules = require("./config/modules");
 const plugins = require("./config/plugins");
 const resolve = require("./config/resolve");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const config = {
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: "src/index.tsx",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "index.[hash].js",
+    filename: "index.js",
     // 打包後使用 BrowserRouter 才不會掛掉
-    publicPath: "./",
+    publicPath: "/",
     clean: true,
   },
   devtool: "inline-source-map",
@@ -25,6 +27,9 @@ const config = {
     rules: [modules.cssLoader, modules.imageLoader, modules.babelLoader],
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
     new Dotenv({
       path: "../.env",
     }),

@@ -7,7 +7,7 @@ const resolve = require("./config/resolve");
 
 const config = {
   mode: "production",
-  entry: "./src/index.tsx",
+  entry: "src/index.tsx",
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "index.[hash].js",
