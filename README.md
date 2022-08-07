@@ -13,33 +13,27 @@
 - 使用 Webpack 5 以上
 - 測試使用 jest 和 React Testing Library
 - ESLint 採用 Airbnb 格式並全部採用雙引號
-- react-router-dom 採用 v5 版本，主要是配合公司版本
+- react-router-dom 採用 v6 版本
 
 ## Directory Structure
 
-### Src Directory
-
-| Name      | Describe                                                        |
-| --------- | --------------------------------------------------------------- |
-| Common    | 放置通用 API                                                    |
-| Component | 放置通用元件                                                    |
-| CSS       | 放 CSS，不過因為使用 styled-components 所以應該不太會使用到這個 |
-| Pages     | 放置路由元件                                                    |
-| index.tsx | 進入點                                                          |
+```bash
+|___  dist // 打包後的結果
+|___  node_modules
+|___  public // 靜態資源
+|     |___  Image
+|___  src
+|     |___  assets
+|
+```
 
 ### Public Directory
-
-> 單純放置靜態資源。
-
-| Name       | Describe |
-| ---------- | -------- |
-| index.html | root     |
-| Image      | 圖片     |
 
 ## Scripts
 
 - `start` - 啟動 Web Server。
-- `build` - 打包專案。
+- `build` - 打包專案, dev。
+- `build:prod` - 打包專案, prod。
 - `lint` - 使用 ESLint 解決格式問題。
 - `test:jest` - 啟動測試。
 - `test:jest--coverage` - 啟動測試並產出報告。
