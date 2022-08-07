@@ -1,6 +1,11 @@
 const path = require("path");
+// 合併不同配置
 const { merge } = require("webpack-merge");
+// 讓 Webpack 能讀取到 .env 全域變數配置檔案
 const Dotenv = require("dotenv-webpack");
+// 壓縮打包後的檔案
+const CompressionPlugin = require("compression-webpack-plugin");
+// config
 const modules = require("./config/modules");
 const plugins = require("./config/plugins");
 const resolve = require("./config/resolve");
@@ -9,24 +14,22 @@ const config = {
   mode: "production",
   entry: "src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "../dist"),
-    filename: "index.[hash].js",
+    path: path.resolve("dist"),
+    filename: "index.[contenthash].js",
     // 打包後使用 BrowserRouter 才不會掛掉
     publicPath: "./",
     clean: true,
   },
   devtool: "eval-cheap-source-map",
-  devServer: {
-    // 在本地使用 BrowserRouter 才不會掛掉
-    historyApiFallback: true,
-  },
   module: {
     rules: [modules.cssLoader, modules.imageLoader, modules.babelLoader],
   },
+  // prod 專屬的 plugins
   plugins: [
     new Dotenv({
       path: "../.env.production",
     }),
+    new CompressionPlugin(),
   ],
 };
 
