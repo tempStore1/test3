@@ -14,9 +14,8 @@ import rootReducer from "@/reducers";
 function logger({ getState }: { getState: any }) {
   if (process.env.NODE_ENV === "development") {
     return (next: any) => (action: any) => {
-      // 一個 curry function
-      // next 會不斷指向下一個 middleware。
-      // 先照抄官網，等了解 curry function 後再來寫註解。
+      // logger 被呼叫後第一個傳入的參數會是下一個 middleware。
+      // 該 middleware 會做甚麼事情就放在 action 裡面。
       console.log("will dispatch", action);
 
       const returnValue = next(action);
