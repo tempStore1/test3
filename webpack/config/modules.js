@@ -9,9 +9,28 @@ const cssLoader = {
   use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
 };
 
+const sassLoader = {
+  test: /\.s[ac]ss$/i,
+  use: [
+    MiniCssExtractPlugin.loader,
+    "css-loader",
+    "postcss-loader",
+    "sass-loader",
+  ],
+};
+
 const imageLoader = {
   test: /\.(png|jpg|jpeg|svg|gif)$i/,
-  type: "asset/resource",
+  type: "asset",
+  parser: {
+    dataUrlCondition: {
+      // 小於 10 kb 會被轉成 base64
+      maxSize: 10 * 1024, // 10 kb
+    },
+  },
+  generator: {
+    filename: "image/[hash][ext][query]",
+  },
 };
 
 // 使用 babel 加載 ES2015+ 的程式，並將其轉為ES5 的版本。
@@ -25,6 +44,7 @@ const babelLoader = {
 
 module.exports = {
   cssLoader,
+  sassLoader,
   imageLoader,
   babelLoader,
 };

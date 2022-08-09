@@ -1,5 +1,6 @@
 {
   "presets": [
+    // 編譯 ES6 語法
     "@babel/preset-env",
     "@babel/preset-typescript",
     ["@babel/preset-react", { "runtime": "automatic" }]

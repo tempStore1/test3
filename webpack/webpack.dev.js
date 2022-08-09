@@ -13,12 +13,11 @@ const resolve = require("./config/resolve");
 
 const config = {
   mode: "development",
-  entry: "src/index.tsx",
   output: {
     path: path.resolve("dist"),
-    filename: "index.js",
+    filename: "js/index.js",
     // 打包後使用 BrowserRouter 才不會掛掉
-    publicPath: "/",
+    publicPath: "http://localhost:3000/",
     clean: true,
   },
   devtool: "inline-source-map",
@@ -27,9 +26,17 @@ const config = {
     port: 3000,
     // 在本地使用 BrowserRouter 才不會掛掉
     historyApiFallback: true,
+    // 當前服務器的根目錄，不是打包後的那個 dist。
+    // 名稱可以自訂，指的是從 XX 包資料夾得到資料。
+    static: "dist",
   },
   module: {
-    rules: [modules.cssLoader, modules.imageLoader, modules.babelLoader],
+    rules: [
+      modules.cssLoader,
+      modules.sassLoader,
+      modules.imageLoader,
+      modules.babelLoader,
+    ],
   },
   // 快取。提升打包速度，會緩存在 node_modules 內。
   cache: {
