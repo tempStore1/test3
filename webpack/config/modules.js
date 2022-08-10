@@ -6,7 +6,18 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // postcss-loader，透過 postcss 來處理你的 css-loader。
 const cssLoader = {
   test: /\.css$/i,
-  use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+  use: [
+    MiniCssExtractPlugin.loader,
+    "css-loader",
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: {
+          plugins: ["postcss-preset-env"],
+        },
+      },
+    },
+  ],
 };
 
 const sassLoader = {
@@ -14,7 +25,14 @@ const sassLoader = {
   use: [
     MiniCssExtractPlugin.loader,
     "css-loader",
-    "postcss-loader",
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: {
+          plugins: ["postcss-preset-env"],
+        },
+      },
+    },
     "sass-loader",
   ],
 };
