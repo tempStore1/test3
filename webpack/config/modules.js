@@ -20,8 +20,8 @@ const sassLoader = {
 };
 
 const imageLoader = {
-  test: /\.(png|jpg|jpeg|svg|gif)$i/,
-  type: "asset",
+  test: /\.(png|svg|jpg|jpeg|gif)$/i,
+  type: "asset/resource",
   parser: {
     dataUrlCondition: {
       // 小於 10 kb 會被轉成 base64

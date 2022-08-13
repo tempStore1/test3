@@ -35,7 +35,7 @@ export default function configureStore(history: any, preloadedState = {}) {
 
   const enhancers = composeEnhancers(applyMiddleware(...middleware));
 
-  const store: Store = createStore(rootReducer(), preloadedState, enhancers);
+  const store: Store = createStore(rootReducer, preloadedState, enhancers);
 
   epicMiddleware.run(rootEpic);
   return store;

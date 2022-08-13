@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: "demo-",
+  prefix: "todo-",
   content: ["src/**/*.ts", "src/**/*.tsx"],
   // darkMode: false, // or 'media' or 'class'
   theme: {},
