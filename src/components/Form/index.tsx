@@ -3,7 +3,11 @@ import Header from "./header";
 import Button from "./Button";
 
 const Form = (props: any) => {
-  return <form className="todo-p-12">{props.children}</form>;
+  return (
+    <form className="todo-p-12" onSubmit={props.onSubmit}>
+      {props.children}
+    </form>
+  );
 };
 
 export { Input, Header, Button };

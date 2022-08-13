@@ -1,30 +1,42 @@
 import { useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 interface LoginProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Login = (props: LoginProps) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("無效的 Email").required("Email 為必填"),
+      password: Yup.string().required("密碼 為必填"),
+    }),
+    onSubmit: (values) => {
+      console.log("登入表單", values);
+    },
+  });
 
   return (
-    <Form>
+    <Form onSubmit={formik.handleSubmit}>
       <Header>最實用的線上代辦事項服務</Header>
       <Input
         title="Email"
-        value={email}
-        errorMsg=""
+        formikType="email"
+        formik={formik}
         placeholder="請輸入Email"
-        onChange={setEmail}
       />
       <Input
         title="密碼"
-        value={password}
-        errorMsg=""
+        formikType="password"
+        formik={formik}
         placeholder="請輸入密碼"
-        onChange={setPassword}
+        type="password"
       />
       <Button type="submit">登入</Button>
       <Button isReverse type="button" onClick={() => props.setIsLogin(false)}>
