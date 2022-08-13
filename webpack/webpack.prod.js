@@ -37,4 +37,4 @@ const config = {
   ],
 };
 
-module.exports = merge(config, plugins("../dist/index.html"), resolve);
+module.exports = merge(config, plugins, resolve);
