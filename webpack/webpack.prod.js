@@ -12,17 +12,21 @@ const resolve = require("./config/resolve");
 
 const config = {
   mode: "production",
-  entry: "src/index.tsx",
   output: {
     path: path.resolve("dist"),
-    filename: "index.[contenthash].js",
+    filename: "js/index.[contenthash].js",
     // 打包後使用 BrowserRouter 才不會掛掉
     publicPath: "./",
     clean: true,
   },
   devtool: "eval-cheap-source-map",
   module: {
-    rules: [modules.cssLoader, modules.imageLoader, modules.babelLoader],
+    rules: [
+      modules.cssLoader,
+      modules.sassLoader,
+      modules.imageLoader,
+      modules.babelLoader,
+    ],
   },
   // prod 專屬的 plugins
   plugins: [

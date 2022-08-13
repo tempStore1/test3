@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve --progress --static --open",
+    "start": "cross-env NODE_ENV=development webpack serve --progress",
     "build": "cross-env NODE_ENV=development webpack --color --progress --env development",
     "build:prod": "cross-env NODE_ENV=production webpack --color --progress --env production",
     "lint": "eslint --fix src/*.js",
@@ -46,13 +46,15 @@
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.0",
+    "sass": "^1.54.3",
+    "sass-loader": "^13.0.2",
     "tailwindcss": "^3.1.4",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.7.2",
-    "webpack": "^5.72.1",
+    "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
@@ -64,6 +66,7 @@
     "@types/redux-actions": "^2.6.2",
     "babel-plugin-macros": "^3.1.0",
     "history": "^5.3.0",
+    "postcss-preset-env": "^7.7.2",
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -75,5 +78,10 @@
     "redux-observable": "^2.0.0",
     "rxjs": "^7.5.5",
     "styled-components": "^5.3.5"
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not dead"
+  ]
 }
