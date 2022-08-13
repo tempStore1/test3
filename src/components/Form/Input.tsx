@@ -3,7 +3,7 @@ const Input = (props: {
   value: string;
   errorMsg: string;
   placeholder?: string;
-  onChange: Function;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const { title, value, errorMsg, placeholder, onChange: changeTo } = props;
   return (
@@ -12,7 +12,7 @@ const Input = (props: {
         {title}
       </p>
       <input
-        className="todo-px-3 todo-font-medium todo-text-base todo-py-4 todo-w-full todo-text-[#9F9A91] todo-leading-6	todo-rounded-lg todo-mb-1 todo-min-w-[300px]"
+        className="todo-px-3 todo-font-medium todo-text-base todo-py-4 todo-w-full todo-text-[#9F9A91] todo-leading-6	todo-rounded-lg todo-mb-1 todo-min-w-[300px] placeholder:todo-font-medium placeholder:todo-text-[#9F9A91]"
         type="text"
         value={value}
         placeholder={placeholder}
