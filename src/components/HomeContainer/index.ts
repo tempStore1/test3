@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import DecorateBox from "./DecorateBox";
 
-export const MainContainer = styled.div`
+export const HomeContainer = styled.div`
+  background-color: #ffd370;
   min-height: 100vh;
   width: 100%;
   height: auto;
@@ -13,3 +15,5 @@ export const MainContainer = styled.div`
   margin: 0 auto;
   padding: 50px;
 `;
+
+export { DecorateBox };
