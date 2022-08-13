@@ -1,6 +1,5 @@
 import { combineEpics } from "redux-observable";
-import WaifuActionEpics from "@/pages/Waifu/WaifuActionEpic";
 
-const rootEpic = combineEpics(...WaifuActionEpics);
+const rootEpic = combineEpics();
 
 export default rootEpic;
