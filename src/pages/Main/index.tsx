@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MainContainer, Navbar } from "@/components/MainContainer";
+import TodoModule from "@/components/Todo";
 import styled from "styled-components";
 
 const MainStyles = styled.div`
@@ -18,7 +19,9 @@ const Main: React.FC = () => {
   return (
     <MainStyles>
       <Navbar />
-      <MainContainer></MainContainer>
+      <MainContainer>
+        <TodoModule />
+      </MainContainer>
     </MainStyles>
   );
 };
