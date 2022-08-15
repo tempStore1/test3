@@ -1,9 +1,8 @@
 import * as React from "react";
-import { MainContainer } from "@/components/MainContainer";
-import { Logo } from "@/components/HomeContainer/DecorateBox";
+import { MainContainer, Navbar } from "@/components/MainContainer";
 import styled from "styled-components";
 
-const MainBg = styled.div`
+const MainStyles = styled.div`
   background: linear-gradient(
     172.7deg,
     #ffd370 5.12%,
@@ -12,14 +11,15 @@ const MainBg = styled.div`
     #ffffff 53.45%,
     #ffffff 94.32%
   );
+  padding: 50px;
 `;
 
 const Main: React.FC = () => {
   return (
-    <MainBg>
-      <Logo />
+    <MainStyles>
+      <Navbar />
       <MainContainer></MainContainer>
-    </MainBg>
+    </MainStyles>
   );
 };
 

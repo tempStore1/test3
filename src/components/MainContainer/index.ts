@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Navbar from "./Navbar";
 
 export const MainContainer = styled.div`
   min-height: 100vh;
@@ -11,5 +12,6 @@ export const MainContainer = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 50px;
 `;
+
+export { Navbar };
