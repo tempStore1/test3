@@ -1,12 +1,14 @@
 import { useState } from "react";
 import AddNewItem from "./AddNewItem";
 import FilterTypeBar, { Label } from "./FilterTypeBar";
+import TodoItem from "./TodoItem";
 import styled from "styled-components";
 
 const TodoBox = styled.div`
   margin-top: 1rem;
   box-shadow: 0px 0px 15px 0px #00000026;
   display: flex;
+  flex-direction: column;
   border-radius: 10px;
   font-size: 14px;
   min-width: 500px;
@@ -41,6 +43,9 @@ const TodoModule = () => {
             完成
           </Label>
         </FilterTypeBar>
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
       </TodoBox>
     </>
   );
