@@ -14,6 +14,7 @@ const MainStyles = styled.div`
   );
   padding: 50px;
 `;
+MainStyles.displayName = "MainStyles";
 
 const Main: React.FC = () => {
   return (

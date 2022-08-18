@@ -1,5 +1,6 @@
+import { useState } from "react";
 import AddNewItem from "./AddNewItem";
-import FilterTypeBar from "./FilterTypeBar";
+import FilterTypeBar, { Label } from "./FilterTypeBar";
 import styled from "styled-components";
 
 const TodoBox = styled.div`
@@ -11,13 +12,35 @@ const TodoBox = styled.div`
   min-width: 500px;
   background-color: #fff;
 `;
+TodoBox.displayName = "TodoBox";
 
 const TodoModule = () => {
+  const [filterType, setFilterType] = useState("unfinished");
+
   return (
     <>
       <AddNewItem />
       <TodoBox>
-        <FilterTypeBar />
+        <FilterTypeBar>
+          <Label
+            checked={filterType === "all"}
+            onClick={() => setFilterType("all")}
+          >
+            全部
+          </Label>
+          <Label
+            checked={filterType === "unfinished"}
+            onClick={() => setFilterType("unfinished")}
+          >
+            待完成
+          </Label>
+          <Label
+            checked={filterType === "finished"}
+            onClick={() => setFilterType("finished")}
+          >
+            完成
+          </Label>
+        </FilterTypeBar>
       </TodoBox>
     </>
   );
