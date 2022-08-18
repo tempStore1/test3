@@ -12,7 +12,6 @@ const AddNewItem = () => {
         alt="新增按鈕"
         className="todo-cursor-pointer todo-pr-1 todo-py-1"
       />
-      {/* <button type="button"></button> */}
     </div>
   );
 };
