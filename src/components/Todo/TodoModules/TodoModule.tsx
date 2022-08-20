@@ -1,10 +1,10 @@
-import { useState } from "react";
-import AddNewItem from "./AddNewItem";
-import FilterTypeBar, { Label } from "./FilterTypeBar";
-import TodoItem from "./TodoItem";
 import styled from "styled-components";
 
-const TodoBox = styled.div`
+/**
+ * 因為使用 `flex-direction: column;`
+ * 所以直接往下引用即可，不用再額外包一層。
+ */
+export const TodoBox = styled.div`
   margin-top: 1rem;
   box-shadow: 0px 0px 15px 0px #00000026;
   display: flex;
@@ -16,39 +16,8 @@ const TodoBox = styled.div`
 `;
 TodoBox.displayName = "TodoBox";
 
-const TodoModule = () => {
-  const [filterType, setFilterType] = useState("unfinished");
-
-  return (
-    <div className="todo-min-w-[500px]">
-      <AddNewItem />
-      <TodoBox>
-        <FilterTypeBar>
-          <Label
-            checked={filterType === "all"}
-            onClick={() => setFilterType("all")}
-          >
-            全部
-          </Label>
-          <Label
-            checked={filterType === "unfinished"}
-            onClick={() => setFilterType("unfinished")}
-          >
-            待完成
-          </Label>
-          <Label
-            checked={filterType === "finished"}
-            onClick={() => setFilterType("finished")}
-          >
-            完成
-          </Label>
-        </FilterTypeBar>
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
-      </TodoBox>
-    </div>
-  );
+const TodoModule = ({ children }: { children: any }) => {
+  return <div className="todo-min-w-[500px]">{children}</div>;
 };
 
 export default TodoModule;

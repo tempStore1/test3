@@ -1,3 +1,15 @@
-import TodoModule from "./TodoModules/TodoModule";
+import TodoModule, { TodoBox } from "./TodoModules/TodoModule";
+import AddNewItem from "./TodoModules/AddNewItem";
+import FilterTypeBar, { Label } from "./TodoModules/FilterTypeBar";
+import TodoFooter from "./TodoModules/TodoFooter";
+import TodoItem from "./TodoModules/TodoItem";
 
-export default TodoModule;
+export { TodoModule };
+export default {
+  TodoBox,
+  AddNewItem,
+  FilterTypeBar,
+  Label,
+  TodoFooter,
+  TodoItem,
+};

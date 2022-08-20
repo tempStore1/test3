@@ -7,7 +7,7 @@ export const MainContainer = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
   overflow-x: hidden;
