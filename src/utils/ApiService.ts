@@ -1,20 +1,37 @@
-type Headers = {
-  method?: string;
-  headers?: object;
-  body?: object;
-};
-interface ApiService {
-  get: (url: string, object?: Headers) => any;
-}
-
-export const ApiService: ApiService = {
-  get: async (url: string, headers: Headers) => {
+const ApiService = {
+  get: async (url: string) => {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        method: "GET",
+      });
       const data = await res.json();
       return data;
     } catch (err) {
       console.log("error", err);
     }
   },
+  post: async (
+    url: string,
+    params: {
+      headers: {
+        "Content-type": "application/json";
+      };
+    }
+  ) => {
+    const { headers } = params;
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers,
+        body,
+      });
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.log("error", err);
+      return err;
+    }
+  },
 };
+
+export default ApiService;

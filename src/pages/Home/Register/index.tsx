@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
+import Resource from "@/resource";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -23,12 +24,21 @@ const Register = (props: RegisterProps) => {
         .oneOf([Yup.ref("password"), null], "必須與密碼一致")
         .required("再次輸入密碼"),
     }),
-    onSubmit: (values) => {
-      console.log("註冊表單", values);
+    onSubmit: async (values) => {
+      const { email, password, nickname } = values;
+      const user = {
+        email,
+        nickname,
+        password,
+      };
+      const result = await Resource.RegisterResource.userRegister(user);
+      if (result === "註冊成功") {
+        props.setIsLogin(true);
+      }
     },
   });
   return (
-    <Form>
+    <Form onSubmit={formik.handleSubmit}>
       <Header>註冊帳號</Header>
       <Input
         title="Email"

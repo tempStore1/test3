@@ -48,7 +48,7 @@ const config = {
       openAnalyzer: false,
     }),
     new Dotenv({
-      path: "../.env",
+      systemvars: true,
     }),
   ],
 };
