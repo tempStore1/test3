@@ -11,8 +11,8 @@ const TodoBox = styled.div`
   flex-direction: column;
   border-radius: 10px;
   font-size: 14px;
-  min-width: 500px;
   background-color: #fff;
+  width: 100%;
 `;
 TodoBox.displayName = "TodoBox";
 
@@ -20,7 +20,7 @@ const TodoModule = () => {
   const [filterType, setFilterType] = useState("unfinished");
 
   return (
-    <>
+    <div className="todo-min-w-[500px]">
       <AddNewItem />
       <TodoBox>
         <FilterTypeBar>
@@ -47,7 +47,7 @@ const TodoModule = () => {
         <TodoItem />
         <TodoItem />
       </TodoBox>
-    </>
+    </div>
   );
 };
 
