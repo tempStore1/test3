@@ -2,12 +2,16 @@ import { useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Resource from "./LoginResource";
+import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Login = (props: LoginProps) => {
+  const history = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -17,8 +21,16 @@ const Login = (props: LoginProps) => {
       email: Yup.string().email("無效的 Email").required("Email 為必填"),
       password: Yup.string().required("密碼 為必填"),
     }),
-    onSubmit: (values) => {
-      console.log("登入表單", values);
+    onSubmit: async (values) => {
+      const { email, password } = values;
+      const user = {
+        email,
+        password,
+      };
+      const result = await Resource.userLogin(user);
+      if (result === "登入成功") {
+        history("main");
+      }
     },
   });
 

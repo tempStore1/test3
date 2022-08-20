@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
-import Resource from "@/resource";
+import Resource from "./RegisterResource";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -31,7 +31,7 @@ const Register = (props: RegisterProps) => {
         nickname,
         password,
       };
-      const result = await Resource.RegisterResource.userRegister(user);
+      const result = await Resource.userRegister(user);
       if (result === "註冊成功") {
         props.setIsLogin(true);
       }

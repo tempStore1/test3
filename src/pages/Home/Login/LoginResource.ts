@@ -1,23 +1,14 @@
-// import ApiService from "@/utils/ApiService";
-
-import { data } from "autoprefixer";
-
-const userRegister = async (user: {
-  email: string;
-  nickname: string;
-  password: string;
-}) => {
-  const res = await fetch(`${process.env.API_PATH}/users`, {
+const userLogin = async (user: { email: string; password: string }) => {
+  const res = await fetch(`${process.env.API_PATH}/users/sign_in`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ user }),
   });
-  if (res.status === 201) {
+  if (res.status === 200) {
     const data = await res.json();
     const { message } = data;
-    alert(`${message}`);
     return message;
   } else {
     const data = await res.json();
@@ -29,5 +20,5 @@ const userRegister = async (user: {
 };
 
 export default {
-  userRegister,
+  userLogin,
 };
