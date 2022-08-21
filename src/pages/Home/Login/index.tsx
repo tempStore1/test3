@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import Resource from "./LoginResource";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createType } from "@/components/Spin/SpinAction";
+import { isLoading } from "@/components/Spin/SpinResource";
 
 interface LoginProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,18 +30,12 @@ const Login = (props: LoginProps) => {
         email,
         password,
       };
-      await dispatch({
-        type: createType.LOADING_STATUS,
-        isLoading: true,
-      });
+      await isLoading(dispatch, true);
       const result = await Resource.userLogin(user);
       if (result === "登入成功") {
         history("main");
       }
-      await dispatch({
-        type: createType.LOADING_STATUS,
-        isLoading: false,
-      });
+      await isLoading(dispatch, false);
     },
   });
 

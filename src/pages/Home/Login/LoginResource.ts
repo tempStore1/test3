@@ -1,3 +1,5 @@
+import ErrorMessage from "@/utils/ErrorMessage";
+
 const userLogin = async (user: { email: string; password: string }) => {
   const res = await fetch(`${process.env.API_PATH}/users/sign_in`, {
     method: "POST",
@@ -19,15 +21,7 @@ const userLogin = async (user: { email: string; password: string }) => {
 
     return message;
   } else {
-    const data = await res.json();
-    const { message, error } = data;
-    if (error) {
-      const allError = error.join(",");
-      alert(`${message}: ${allError}`);
-    } else {
-      alert(`${message}`);
-    }
-    return false;
+    ErrorMessage(res);
   }
 };
 

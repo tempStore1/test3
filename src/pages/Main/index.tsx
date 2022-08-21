@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { MainContainer, Navbar } from "@/components/MainContainer";
 import Todo, { TodoModule } from "@/components/Todo";
+import Resource from "./MainResource";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { isLoading } from "@/components/Spin/SpinResource";
 
 const MainStyles = styled.div`
   background: linear-gradient(
@@ -18,10 +22,24 @@ MainStyles.displayName = "MainStyles";
 
 const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
+  const dispatch = useDispatch();
+  const history = useNavigate();
+
+  const handleLogout = async () => {
+    await isLoading(dispatch, true);
+
+    const result = await Resource.handleLogout();
+
+    await isLoading(dispatch, false);
+
+    if (result === "已登出") {
+      history("/");
+    }
+  };
 
   return (
     <MainStyles>
-      <Navbar />
+      <Navbar onClick={handleLogout} />
       <MainContainer>
         <TodoModule>
           <Todo.AddNewItem />

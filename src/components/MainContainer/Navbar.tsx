@@ -1,21 +1,34 @@
 import { Logo } from "@/components/HomeContainer/DecorateBox";
 
-const UserAccount = () => {
+type NavbarProps = {
+  onClick?: () => void;
+};
+
+const UserAccount = ({ onClick }: NavbarProps) => {
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+  const { nickname } = user;
   return (
     <div className="todo-flex todo-justify-center todo-align-center">
-      <h2 className="todo-font-bold todo-text-base todo-mr-4">王曉明的代辦</h2>
-      <button type="button" className="">
+      <h2 className="todo-font-bold todo-text-base todo-mr-4 todo-mb-0">
+        {nickname} 的代辦
+      </h2>
+      <button type="button" onClick={() => onClick()}>
         登出
       </button>
     </div>
   );
 };
 
-const Navbar = () => {
+/**
+ * 可以傳入登出事件
+ * @param param0
+ * @returns
+ */
+const Navbar = ({ onClick }: NavbarProps) => {
   return (
     <div className="todo-flex todo-justify-between todo-items-center">
       <Logo />
-      <UserAccount />
+      <UserAccount onClick={onClick} />
     </div>
   );
 };
