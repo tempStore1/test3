@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Resource from "./LoginResource";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createType } from "@/components/Spin/SpinAction";
 
 interface LoginProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +13,7 @@ interface LoginProps {
 
 const Login = (props: LoginProps) => {
   const history = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -27,10 +30,18 @@ const Login = (props: LoginProps) => {
         email,
         password,
       };
+      await dispatch({
+        type: createType.LOADING_STATUS,
+        isLoading: true,
+      });
       const result = await Resource.userLogin(user);
       if (result === "登入成功") {
         history("main");
       }
+      await dispatch({
+        type: createType.LOADING_STATUS,
+        isLoading: false,
+      });
     },
   });
 

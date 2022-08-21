@@ -13,8 +13,12 @@ const userLogin = async (user: { email: string; password: string }) => {
   } else {
     const data = await res.json();
     const { message, error } = data;
-    const allError = error.join(",");
-    alert(`${message}: ${allError}`);
+    if (error) {
+      const allError = error.join(",");
+      alert(`${message}: ${allError}`);
+    } else {
+      alert(`${message}`);
+    }
     return false;
   }
 };
