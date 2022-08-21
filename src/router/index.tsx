@@ -1,5 +1,7 @@
 import * as React from "react";
 import type { RouteObject } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+
 const Home = React.lazy(() => import("@/pages/Home"));
 const Main = React.lazy(() => import("@/pages/Main"));
 const NotFound = React.lazy(() => import("@/pages/NotFound"));
@@ -11,9 +13,12 @@ const BaseRouter: RouteObject[] = [
     children: [],
   },
   {
-    path: "/main",
-    element: <Main />,
-    children: [],
+    path: "/*",
+    element: (
+      <PrivateRoute path="main">
+        <Main />
+      </PrivateRoute>
+    ),
   },
   {
     path: "*",

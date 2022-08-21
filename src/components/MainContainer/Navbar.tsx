@@ -6,7 +6,10 @@ type NavbarProps = {
 
 const UserAccount = ({ onClick }: NavbarProps) => {
   const user = JSON.parse(localStorage.getItem("userInfo"));
-  const { nickname } = user;
+  let nickname;
+  if (user) {
+    nickname = user.nickname;
+  }
   return (
     <div className="todo-flex todo-justify-center todo-align-center">
       <h2 className="todo-font-bold todo-text-base todo-mr-4 todo-mb-0">
