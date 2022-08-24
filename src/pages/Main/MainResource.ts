@@ -1,4 +1,5 @@
 import ErrorMessage from "@/utils/ErrorMessage";
+import ApiService from "@/utils/ApiService";
 
 const handleLogout = async () => {
   const token = localStorage.getItem("token");
@@ -28,6 +29,11 @@ const handleLogout = async () => {
   }
 };
 
+const getTodos = () => {
+  return ApiService.get("/todos");
+};
+
 export default {
   handleLogout,
+  getTodos,
 };
