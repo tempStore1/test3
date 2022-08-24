@@ -91,6 +91,16 @@ const ApiService = {
         console.error(error);
       });
   },
+  post(url: string, data = {}) {
+    return instance
+      .post(url, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
 };
 
 export default ApiService;

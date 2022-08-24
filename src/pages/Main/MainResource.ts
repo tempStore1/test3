@@ -33,7 +33,12 @@ const getTodos = () => {
   return ApiService.get("/todos");
 };
 
+const addTodos = (data: { todo: { content: string } }) => {
+  return ApiService.post("/todos", data);
+};
+
 export default {
   handleLogout,
   getTodos,
+  addTodos,
 };

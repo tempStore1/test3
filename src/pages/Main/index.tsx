@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoading } from "@/components/Spin/SpinResource";
-import { getTodos } from "./MainAction";
+import { getTodos, addTodos } from "./MainAction";
 
 const MainStyles = styled.div`
   background: linear-gradient(
@@ -23,6 +23,7 @@ MainStyles.displayName = "MainStyles";
 
 const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
+  const [doSomething, setDoSomething] = useState("");
   const todos = useSelector((state) => state.mainReducer.todos);
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -46,7 +47,11 @@ const Main: React.FC = () => {
       <Navbar onClick={handleLogout} />
       <MainContainer>
         <TodoModule>
-          <Todo.AddNewItem />
+          <Todo.AddNewItem
+            pushSomeThing={addTodos}
+            value={doSomething}
+            onChange={setDoSomething}
+          />
           {todos.length ? (
             <Todo.TodoBox>
               <Todo.FilterTypeBar>
