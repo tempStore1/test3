@@ -75,7 +75,7 @@ const Main: React.FC = () => {
                 </Todo.Label>
               </Todo.FilterTypeBar>
               {todos.map((item) => (
-                <Todo.TodoItem key={item} />
+                <Todo.TodoItem key={item.id} content={item.content} />
               ))}
               <Todo.TodoFooter />
             </Todo.TodoBox>
