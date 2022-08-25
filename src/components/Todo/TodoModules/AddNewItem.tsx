@@ -18,7 +18,7 @@ const AddNewItem = ({
       <input
         value={value}
         onChange={(e) => addItem(e.target.value)}
-        className="todo-rounded-l-lg todo-text-[#9F9A91] todo-w-full todo-h-full todo-py-3 todo-px-4"
+        className="todo-rounded-l-lg todo-text-[#9F9A91] todo-w-full todo-h-full todo-py-3 todo-px-4 todo-outline-0"
         placeholder="新增代辦事項"
       />
       <img

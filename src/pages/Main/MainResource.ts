@@ -14,7 +14,6 @@ const handleLogout = async () => {
     });
 
     const { status } = result;
-    console.log(result);
 
     if (status === 200) {
       const data = await result.json();

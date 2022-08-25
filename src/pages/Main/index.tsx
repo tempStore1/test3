@@ -5,8 +5,9 @@ import Resource from "./MainResource";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { isLoading } from "@/components/Spin/SpinResource";
+import { isLoading } from "@/resource/SpinResource";
 import { getTodos, addTodos } from "./MainAction";
+import type { RootState } from "@/store";
 
 const MainStyles = styled.div`
   background: linear-gradient(
@@ -24,7 +25,7 @@ MainStyles.displayName = "MainStyles";
 const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
   const [doSomething, setDoSomething] = useState("");
-  const todos = useSelector((state) => state.mainReducer.todos);
+  const todos = useSelector((state: RootState) => state.mainReducer.todos);
   const dispatch = useDispatch();
   const history = useNavigate();
 
@@ -74,7 +75,7 @@ const Main: React.FC = () => {
                   完成
                 </Todo.Label>
               </Todo.FilterTypeBar>
-              {todos.map((item) => (
+              {todos.map((item: any) => (
                 <Todo.TodoItem key={item.id} content={item.content} />
               ))}
               <Todo.TodoFooter />

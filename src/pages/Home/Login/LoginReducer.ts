@@ -1,16 +1,16 @@
 import { handleActions } from "redux-actions";
-import { createType } from "./MainAction";
+import { createType } from "./LoginAction";
 
 export const initState = {
-  todos: [] as string[],
+  loginState: "",
 };
 
 export default handleActions(
   {
-    [createType.MAIN_GET_TODOS_SUCCESS]: (state, payload) => {
+    [createType.USER_LOGIN_STATE]: (state, payload) => {
       return {
         ...state,
-        todos: payload.todos,
+        loginState: payload.state,
       };
     },
   },

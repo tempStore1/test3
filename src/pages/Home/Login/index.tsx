@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Resource from "./LoginResource";
+import Resource from "../../../resource/LoginResource";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { isLoading } from "@/components/Spin/SpinResource";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "./LoginAction";
+import type { RootState } from "@/store";
 
 interface LoginProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +15,9 @@ interface LoginProps {
 const Login = (props: LoginProps) => {
   const history = useNavigate();
   const dispatch = useDispatch();
+  const state = useSelector(
+    (state: RootState) => state.loginReducer.loginState
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -30,14 +34,23 @@ const Login = (props: LoginProps) => {
         email,
         password,
       };
-      await isLoading(dispatch, true);
-      const result = await Resource.userLogin(user);
-      if (result === "登入成功") {
-        history("main");
-      }
-      await isLoading(dispatch, false);
+
+      dispatch(userLogin(user));
+
+      // await isLoading(dispatch, true);
+      // const result = await Resource.userLogin(user);
+      // if (result === "登入成功") {
+      //   history("main");
+      // }
+      // await isLoading(dispatch, false);
     },
   });
+
+  useEffect(() => {
+    if (state === "登入成功") {
+      history("main");
+    }
+  }, [state]);
 
   return (
     <Form onSubmit={formik.handleSubmit}>
