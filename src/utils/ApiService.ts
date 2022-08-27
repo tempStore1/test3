@@ -1,13 +1,11 @@
 import axios from "axios";
 import { notification } from "antd";
+import handleError from "./ErrorMessage";
 
 const instance = axios.create({
   baseURL: process.env.API_PATH,
   timeout: 20000,
 });
-
-// instance.defaults.baseURL = process.env.API_PATH;
-// instance.defaults.timeout = 20000;
 
 instance.interceptors.request.use(
   (config) => {
@@ -88,7 +86,8 @@ const ApiService = {
         return res;
       })
       .catch((error) => {
-        console.error(error);
+        handleError(error.response);
+        return error;
       });
   },
   post(url: string, data = {}) {
@@ -98,7 +97,8 @@ const ApiService = {
         return res;
       })
       .catch((error) => {
-        console.error(error);
+        handleError(error.response);
+        return error;
       });
   },
 };

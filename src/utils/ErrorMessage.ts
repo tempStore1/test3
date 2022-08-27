@@ -3,7 +3,7 @@
  * @param result
  */
 const handleError = async (result: any) => {
-  const data = await result.json();
+  const { data } = result;
   const { message, error } = data;
   if (error) {
     const allError = error.join(",");

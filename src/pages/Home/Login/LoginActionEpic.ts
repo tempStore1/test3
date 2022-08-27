@@ -24,10 +24,11 @@ const userLoginEpic = (action$: any) => {
                 of(LoginState(message)),
                 of(LoadingAction.loadingStatus(false))
               );
+            } else {
+              return concat(of(LoadingAction.loadingStatus(false)));
             }
-            return concat(of(LoadingAction.loadingStatus(false)));
           }),
-          catchError((err) => {
+          catchError((err): any => {
             console.error(err);
           })
         )
