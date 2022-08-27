@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Resource from "../../../resource/LoginResource";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "./LoginAction";
@@ -36,13 +35,6 @@ const Login = (props: LoginProps) => {
       };
 
       dispatch(userLogin(user));
-
-      // await isLoading(dispatch, true);
-      // const result = await Resource.userLogin(user);
-      // if (result === "登入成功") {
-      //   history("main");
-      // }
-      // await isLoading(dispatch, false);
     },
   });
 

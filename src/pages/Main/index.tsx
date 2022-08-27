@@ -5,7 +5,6 @@ import Resource from "./MainResource";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { isLoading } from "@/resource/SpinResource";
 import { getTodos, addTodos } from "./MainAction";
 import type { RootState } from "@/store";
 
@@ -30,9 +29,7 @@ const Main: React.FC = () => {
   const history = useNavigate();
 
   const handleLogout = async () => {
-    await isLoading(dispatch, true);
     const result = await Resource.handleLogout();
-    await isLoading(dispatch, false);
 
     if (result === "已登出") {
       history("/");

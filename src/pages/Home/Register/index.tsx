@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form, { Input, Header, Button } from "@/components/Form";
-import Resource from "./RegisterResource";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { userRegister } from "./RegisterAction";
+import type { RootState } from "@/store";
 
 interface RegisterProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Register = (props: RegisterProps) => {
+  const dispatch = useDispatch();
+  const state = useSelector(
+    (state: RootState) => state.registerReducer.registerState
+  );
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -31,12 +37,16 @@ const Register = (props: RegisterProps) => {
         nickname,
         password,
       };
-      const result = await Resource.userRegister(user);
-      if (result === "註冊成功") {
-        props.setIsLogin(true);
-      }
+      dispatch(userRegister(user));
     },
   });
+
+  useEffect(() => {
+    if (state === "註冊成功") {
+      alert(state);
+      props.setIsLogin(true);
+    }
+  }, [state]);
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Header>註冊帳號</Header>
