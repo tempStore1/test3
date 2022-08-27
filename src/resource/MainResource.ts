@@ -1,6 +1,6 @@
 import ApiService from "@/utils/ApiService";
 
-const userLogout = async () => {
+const userLogout = () => {
   return ApiService.delete("/users/sign_out");
 };
 

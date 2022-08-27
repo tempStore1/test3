@@ -31,7 +31,7 @@ const Register = (props: RegisterProps) => {
         .oneOf([Yup.ref("password"), null], "必須與密碼一致")
         .required("再次輸入密碼"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       const { email, password, nickname } = values;
       const user = {
         email,

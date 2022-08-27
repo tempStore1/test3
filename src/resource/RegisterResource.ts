@@ -1,6 +1,6 @@
 import ApiService from "@/utils/ApiService";
 
-const userRegister = async (user: {
+const userRegister = (user: {
   email: string;
   nickname: string;
   password: string;

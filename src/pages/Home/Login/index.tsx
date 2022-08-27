@@ -30,7 +30,7 @@ const Login = (props: LoginProps) => {
       email: Yup.string().email("無效的 Email").required("Email 為必填"),
       password: Yup.string().required("密碼 為必填"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       const { email, password } = values;
       const user = {
         email,
