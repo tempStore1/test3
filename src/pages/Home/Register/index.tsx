@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "./RegisterAction";
 import type { RootState } from "@/store";
+import { notification } from "antd";
 
 interface RegisterProps {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +44,10 @@ const Register = (props: RegisterProps) => {
 
   useEffect(() => {
     if (state === "註冊成功") {
-      alert(state);
+      notification.info({
+        message: "成功",
+        description: state,
+      });
       props.setIsLogin(true);
     }
   }, [state]);

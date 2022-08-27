@@ -3,6 +3,7 @@ export const createType = {
   MAIN_GET_TODOS: "MAIN_GET_TODOS",
   MAIN_GET_TODOS_SUCCESS: "MAIN_GET_TODOS_SUCCESS",
   MAIN_ADD_TODOS: "MAIN_ADD_TODOS",
+  MAIN_PUT_TODOS: "MAIN_PUT_TODOS",
 };
 
 export const userLogout = () => {
@@ -28,5 +29,13 @@ export const addTodos = (content: string) => {
   return {
     type: createType.MAIN_ADD_TODOS,
     content,
+  };
+};
+
+export const editTodos = (content: string, id: string) => {
+  return {
+    type: createType.MAIN_PUT_TODOS,
+    content,
+    id,
   };
 };

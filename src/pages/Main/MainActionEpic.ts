@@ -4,6 +4,7 @@ import { LoginState } from "@/pages/Home/Login/LoginAction";
 import * as LoadingAction from "@/components/Spin/SpinAction";
 import Resource from "@/resource";
 import { mergeMap, concat, from, catchError, of } from "rxjs";
+import { notification } from "antd";
 
 const userLogoutEpic = (action$: any) => {
   return action$.pipe(
@@ -17,6 +18,7 @@ const userLogoutEpic = (action$: any) => {
               const {
                 data: { message },
               } = response;
+              localStorage.clear();
               return concat(
                 of(LoginState(message, false)),
                 of(LoadingAction.loadingStatus(false))
@@ -47,8 +49,7 @@ const getTodosEpic = (action$: any) => {
               of(LoadingAction.loadingStatus(false))
             );
           }),
-          catchError((err): any => {
-            console.log("err", err);
+          catchError(() => {
             return concat(of(LoadingAction.loadingStatus(false)));
           })
         )
@@ -71,8 +72,7 @@ const addTodoEpic = (action$: any) => {
               of(LoadingAction.loadingStatus(false))
             );
           }),
-          catchError((err): any => {
-            console.log("err", err);
+          catchError(() => {
             return concat(of(LoadingAction.loadingStatus(false)));
           })
         )
@@ -81,4 +81,37 @@ const addTodoEpic = (action$: any) => {
   );
 };
 
-export default [userLogoutEpic, getTodosEpic, addTodoEpic];
+const editTodoEpic = (action$: any) => {
+  return action$.pipe(
+    ofType(createType.MAIN_PUT_TODOS),
+    mergeMap((payload: any) => {
+      const todo = { content: payload.content };
+      const id = payload.id;
+      return concat(
+        of(LoadingAction.loadingStatus(true)),
+        from(Resource.MainResource.editTodos({ todo }, id)).pipe(
+          mergeMap((response: any) => {
+            if (response.status === 200) {
+              console.log(response);
+              notification.success({
+                message: "成功",
+                description: "編輯成功",
+              });
+              return concat(
+                of(getTodos()),
+                of(LoadingAction.loadingStatus(false))
+              );
+            } else {
+              return concat(of(LoadingAction.loadingStatus(false)));
+            }
+          }),
+          catchError(() => {
+            return concat(of(LoadingAction.loadingStatus(false)));
+          })
+        )
+      );
+    })
+  );
+};
+
+export default [userLogoutEpic, getTodosEpic, addTodoEpic, editTodoEpic];
