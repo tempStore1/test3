@@ -10,9 +10,10 @@ export const userLogin = (user: { email: string; password: string }) => {
   };
 };
 
-export const LoginState = (state: string) => {
+export const LoginState = (message: string, state: boolean) => {
   return {
     type: createType.USER_LOGIN_STATE,
+    message,
     state,
   };
 };

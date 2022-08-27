@@ -2,7 +2,8 @@ import { handleActions } from "redux-actions";
 import { createType } from "./LoginAction";
 
 export const initState = {
-  loginState: "",
+  loginState: false,
+  loginMessage: "",
 };
 
 export default handleActions(
@@ -11,6 +12,7 @@ export default handleActions(
       return {
         ...state,
         loginState: payload.state,
+        loginMessage: payload.message,
       };
     },
   },

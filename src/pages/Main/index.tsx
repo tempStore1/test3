@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MainContainer, Navbar } from "@/components/MainContainer";
+import { userLogout } from "./MainAction";
 import Todo, { TodoModule } from "@/components/Todo";
-import Resource from "./MainResource";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,20 +25,28 @@ const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
   const [doSomething, setDoSomething] = useState("");
   const todos = useSelector((state: RootState) => state.mainReducer.todos);
+  const loginMessage = useSelector(
+    (state: RootState) => state.loginReducer.loginMessage
+  );
+  const loginState = useSelector(
+    (state: RootState) => state.loginReducer.loginState
+  );
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const handleLogout = async () => {
-    const result = await Resource.handleLogout();
-
-    if (result === "已登出") {
-      history("/");
-    }
+  const handleLogout = () => {
+    dispatch(userLogout());
   };
 
   useEffect(() => {
     dispatch(getTodos());
   }, []);
+
+  useEffect(() => {
+    if (loginMessage === "已登出" && !loginState) {
+      history("/");
+    }
+  }, [loginMessage, loginState]);
 
   return (
     <MainStyles>

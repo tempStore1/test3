@@ -1,7 +1,14 @@
 export const createType = {
+  MAIN_USER_LOGOUT: "MAIN_USER_LOGOUT",
   MAIN_GET_TODOS: "MAIN_GET_TODOS",
   MAIN_GET_TODOS_SUCCESS: "MAIN_GET_TODOS_SUCCESS",
   MAIN_ADD_TODOS: "MAIN_ADD_TODOS",
+};
+
+export const userLogout = () => {
+  return {
+    type: createType.MAIN_USER_LOGOUT,
+  };
 };
 
 export const getTodos = () => {

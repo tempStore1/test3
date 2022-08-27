@@ -14,7 +14,10 @@ interface LoginProps {
 const Login = (props: LoginProps) => {
   const history = useNavigate();
   const dispatch = useDispatch();
-  const state = useSelector(
+  const loginMessage = useSelector(
+    (state: RootState) => state.loginReducer.loginMessage
+  );
+  const loginState = useSelector(
     (state: RootState) => state.loginReducer.loginState
   );
 
@@ -39,10 +42,10 @@ const Login = (props: LoginProps) => {
   });
 
   useEffect(() => {
-    if (state === "登入成功") {
+    if (loginMessage === "登入成功" && loginState) {
       history("main");
     }
-  }, [state]);
+  }, [loginState, loginMessage]);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

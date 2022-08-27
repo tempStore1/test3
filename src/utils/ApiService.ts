@@ -101,6 +101,28 @@ const ApiService = {
         return error;
       });
   },
+  put(url: string, data = {}) {
+    return instance
+      .put(url, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        handleError(error.response);
+        return error;
+      });
+  },
+  delete(url: string, data = {}) {
+    return instance
+      .delete(url, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        handleError(error.response);
+        return error;
+      });
+  },
 };
 
 export default ApiService;

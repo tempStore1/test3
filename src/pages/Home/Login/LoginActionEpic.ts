@@ -21,7 +21,7 @@ const userLoginEpic = (action$: any) => {
               localStorage.setItem("userInfo", JSON.stringify(response.data));
               localStorage.setItem("token", token);
               return concat(
-                of(LoginState(message)),
+                of(LoginState(message, true)),
                 of(LoadingAction.loadingStatus(false))
               );
             } else {
