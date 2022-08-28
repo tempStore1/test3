@@ -36,7 +36,12 @@ interface TodoItemType {
 const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
   const [doSomething, setDoSomething] = useState("");
+
+  // 原始 todos
   const todos = useSelector((state: RootState) => state.mainReducer.todos);
+  // 畫面上顯示的 todos
+  const [mainTodos, setMainTodos] = useState(todos);
+
   const loginMessage = useSelector(
     (state: RootState) => state.loginReducer.loginMessage
   );
@@ -53,6 +58,22 @@ const Main: React.FC = () => {
   useEffect(() => {
     dispatch(getTodos());
   }, []);
+
+  useEffect(() => {
+    let current = [];
+    current = todos.filter((item: TodoItemType) => {
+      if (item.completed_at && filterType === "finished") {
+        return item;
+      } else if (!item.completed_at && filterType === "unfinished") {
+        return item;
+      } else if (filterType === "all") {
+        return item;
+      }
+    });
+    console.log("current", current);
+
+    setMainTodos(current);
+  }, [filterType, JSON.stringify(todos)]);
 
   useEffect(() => {
     if (loginMessage === "已登出" && !loginState) {
@@ -92,7 +113,7 @@ const Main: React.FC = () => {
                   完成
                 </Todo.Label>
               </Todo.FilterTypeBar>
-              {todos.map((item: TodoItemType) => (
+              {mainTodos.map((item: TodoItemType) => (
                 <Todo.TodoItem
                   key={item.id}
                   itemInfo={item}
