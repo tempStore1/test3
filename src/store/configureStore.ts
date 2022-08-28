@@ -16,11 +16,17 @@ function logger({ getState }: { getState: any }) {
     return (next: any) => (action: any) => {
       // logger 被呼叫後第一個傳入的參數會是下一個 middleware。
       // 該 middleware 會做甚麼事情就放在 action 裡面。
-      console.log("will dispatch", action);
+
+      console.groupCollapsed("發送的 Action");
+      console.group("%cAction：", "color: #2ecc71");
+      console.log(action);
+      console.groupEnd();
+      console.group("%cNew State：", "color: #f39c12");
+      console.log(getState());
+      console.groupEnd();
+      console.groupEnd();
 
       const returnValue = next(action);
-
-      console.log("state after dispatch", getState());
 
       return returnValue;
     };
@@ -28,8 +34,13 @@ function logger({ getState }: { getState: any }) {
 }
 
 export default function configureStore(history: any, preloadedState = {}) {
-  const composeEnhancers =
-    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  let composeEnhancers = compose;
+  if (
+    process.env.NODE_ENV === "development" &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ) {
+    composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+  }
 
   const middleware = [epicMiddleware, logger];
 

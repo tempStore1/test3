@@ -70,7 +70,6 @@ const Main: React.FC = () => {
         return item;
       }
     });
-    console.log("current", current);
 
     setMainTodos(current);
   }, [filterType, JSON.stringify(todos)]);

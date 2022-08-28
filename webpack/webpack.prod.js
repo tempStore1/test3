@@ -31,7 +31,7 @@ const config = {
   // prod 專屬的 plugins
   plugins: [
     new Dotenv({
-      path: "../.env.production",
+      path: ".env.production",
     }),
     new CompressionPlugin(),
   ],
