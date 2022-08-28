@@ -5,7 +5,7 @@ import Todo, { TodoModule } from "@/components/Todo";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodos, addTodos, editTodos } from "./MainAction";
+import { getTodos, addTodos, editTodos, deleteTodos } from "./MainAction";
 import type { RootState } from "@/store";
 
 const MainStyles = styled.div`
@@ -86,6 +86,7 @@ const Main: React.FC = () => {
                   itemId={item.id}
                   content={item.content}
                   handleEdit={editTodos}
+                  handleDelete={deleteTodos}
                 />
               ))}
               <Todo.TodoFooter />

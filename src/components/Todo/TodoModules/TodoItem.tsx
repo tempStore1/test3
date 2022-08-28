@@ -8,11 +8,25 @@ import { notification } from "antd";
 type TodoItemType = {
   content: string;
   itemId: string;
-  onClick?: () => void;
   handleEdit?: any;
+  handleDelete?: any;
 };
 
-const TodoItem = ({ content, handleEdit, itemId }: TodoItemType) => {
+/**
+ * Todo 的項目
+ * @param content: 顯示的文字
+ * @param itemId: 該 Todo 的 id
+ * @param handleEdit: 處理編輯，只需傳入 Action
+ * @param handleDelete: 處理刪除，只需傳入 Action
+ * @returns
+ */
+
+const TodoItem = ({
+  content,
+  handleEdit,
+  itemId,
+  handleDelete,
+}: TodoItemType) => {
   const [isEdit, setIsEdit] = useState(false);
   const [todo, setTodo] = useState(content);
   const dispatch = useDispatch();
@@ -36,6 +50,11 @@ const TodoItem = ({ content, handleEdit, itemId }: TodoItemType) => {
     setIsEdit(false);
   };
 
+  const deleteItem = () => {
+    console.log("?");
+    dispatch(handleDelete(itemId));
+  };
+
   return (
     <div className="todo-flex todo-justify-between todo-items-center todo-px-6 todo-pt-6">
       {!isEdit ? (
@@ -50,7 +69,11 @@ const TodoItem = ({ content, handleEdit, itemId }: TodoItemType) => {
             </p>
           </div>
           <div className="todo-pl-4">
-            <img className="todo-cursor-pointer todo-pb-4" src={closeItem} />
+            <img
+              className="todo-cursor-pointer todo-pb-4"
+              onClick={() => deleteItem()}
+              src={closeItem}
+            />
           </div>
         </>
       ) : (

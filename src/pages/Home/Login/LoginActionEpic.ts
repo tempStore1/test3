@@ -18,8 +18,8 @@ const userLoginEpic = (action$: any) => {
                 data: { message },
               } = response;
               const token = headers.authorization;
-              localStorage.setItem("userInfo", JSON.stringify(response.data));
-              localStorage.setItem("token", token);
+              sessionStorage.setItem("userInfo", JSON.stringify(response.data));
+              sessionStorage.setItem("token", token);
               return concat(
                 of(LoginState(message, true)),
                 of(LoadingAction.loadingStatus(false))

@@ -16,9 +16,14 @@ const editTodos = (data: { todo: { content: string } }, id: string) => {
   return ApiService.put(`/todos/${id}`, data);
 };
 
+const deleteTodos = (id: string) => {
+  return ApiService.delete(`/todos/${id}`);
+};
+
 export default {
   userLogout,
   getTodos,
   addTodos,
   editTodos,
+  deleteTodos,
 };

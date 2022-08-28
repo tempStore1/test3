@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     // 篩選出 token
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token) {
       config.headers.Authorization = token;
     }

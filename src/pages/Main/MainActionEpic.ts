@@ -18,7 +18,7 @@ const userLogoutEpic = (action$: any) => {
               const {
                 data: { message },
               } = response;
-              localStorage.clear();
+              sessionStorage.clear();
               return concat(
                 of(LoginState(message, false)),
                 of(LoadingAction.loadingStatus(false))
@@ -92,7 +92,6 @@ const editTodoEpic = (action$: any) => {
         from(Resource.MainResource.editTodos({ todo }, id)).pipe(
           mergeMap((response: any) => {
             if (response.status === 200) {
-              console.log(response);
               notification.success({
                 message: "成功",
                 description: "編輯成功",
@@ -114,4 +113,41 @@ const editTodoEpic = (action$: any) => {
   );
 };
 
-export default [userLogoutEpic, getTodosEpic, addTodoEpic, editTodoEpic];
+const deleteTodoEpic = (action$: any) => {
+  return action$.pipe(
+    ofType(createType.MAIN_DELETE_TODOS),
+    mergeMap((payload: any) => {
+      const id = payload.id;
+      return concat(
+        of(LoadingAction.loadingStatus(true)),
+        from(Resource.MainResource.deleteTodos(id)).pipe(
+          mergeMap((response: any) => {
+            if (response.status === 200) {
+              notification.success({
+                message: "成功",
+                description: "已刪除",
+              });
+              return concat(
+                of(getTodos()),
+                of(LoadingAction.loadingStatus(false))
+              );
+            } else {
+              return concat(of(LoadingAction.loadingStatus(false)));
+            }
+          }),
+          catchError(() => {
+            return concat(of(LoadingAction.loadingStatus(false)));
+          })
+        )
+      );
+    })
+  );
+};
+
+export default [
+  userLogoutEpic,
+  getTodosEpic,
+  addTodoEpic,
+  editTodoEpic,
+  deleteTodoEpic,
+];

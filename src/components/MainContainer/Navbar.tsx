@@ -5,7 +5,7 @@ type NavbarProps = {
 };
 
 const UserAccount = ({ onClick }: NavbarProps) => {
-  const user = JSON.parse(localStorage.getItem("userInfo"));
+  const user = JSON.parse(sessionStorage.getItem("userInfo"));
   let nickname;
   if (user) {
     nickname = user.nickname;
