@@ -67,10 +67,7 @@ const addTodoEpic = (action$: any) => {
         of(LoadingAction.loadingStatus(true)),
         from(Resource.MainResource.addTodos({ todo })).pipe(
           mergeMap(() => {
-            return concat(
-              of(getTodos()),
-              of(LoadingAction.loadingStatus(false))
-            );
+            return concat(of(getTodos()));
           }),
           catchError(() => {
             return concat(of(LoadingAction.loadingStatus(false)));
@@ -96,10 +93,7 @@ const editTodoEpic = (action$: any) => {
                 message: "成功",
                 description: "編輯成功",
               });
-              return concat(
-                of(getTodos()),
-                of(LoadingAction.loadingStatus(false))
-              );
+              return concat(of(getTodos()));
             } else {
               return concat(of(LoadingAction.loadingStatus(false)));
             }
@@ -127,10 +121,31 @@ const deleteTodoEpic = (action$: any) => {
                 message: "成功",
                 description: "已刪除",
               });
-              return concat(
-                of(getTodos()),
-                of(LoadingAction.loadingStatus(false))
-              );
+              return concat(of(getTodos()));
+            } else {
+              return concat(of(LoadingAction.loadingStatus(false)));
+            }
+          }),
+          catchError(() => {
+            return concat(of(LoadingAction.loadingStatus(false)));
+          })
+        )
+      );
+    })
+  );
+};
+
+const changeStatusTodoEpic = (action$: any) => {
+  return action$.pipe(
+    ofType(createType.MAIN_TODOS_CHANGE),
+    mergeMap((payload: any) => {
+      const id = payload.id;
+      return concat(
+        of(LoadingAction.loadingStatus(true)),
+        from(Resource.MainResource.changeStatusTodos(id)).pipe(
+          mergeMap((response: any) => {
+            if (response.status === 200) {
+              return concat(of(getTodos()));
             } else {
               return concat(of(LoadingAction.loadingStatus(false)));
             }
@@ -150,4 +165,5 @@ export default [
   addTodoEpic,
   editTodoEpic,
   deleteTodoEpic,
+  changeStatusTodoEpic,
 ];

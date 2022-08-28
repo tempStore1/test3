@@ -4,29 +4,35 @@ import closeItem from "@/assets/Image/closeItem.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { notification } from "antd";
+import { editTodos } from "@/pages/Main/MainAction";
 
 type TodoItemType = {
-  content: string;
-  itemId: string;
+  itemInfo: {
+    id: string;
+    content: string;
+    completed_at: string;
+  };
   handleEdit?: any;
   handleDelete?: any;
+  handleChangeStatus?: any;
 };
 
 /**
  * Todo 的項目
- * @param content: 顯示的文字
- * @param itemId: 該 Todo 的 id
+ * @param itemInfo: 該項目的資料，會需要 id、content、completed_at
  * @param handleEdit: 處理編輯，只需傳入 Action
  * @param handleDelete: 處理刪除，只需傳入 Action
+ * @param handleChangeStatus: 處理切換模式，只需傳入 Action
  * @returns
  */
 
 const TodoItem = ({
-  content,
+  itemInfo,
   handleEdit,
-  itemId,
   handleDelete,
+  handleChangeStatus,
 }: TodoItemType) => {
+  const { content, id: itemId, completed_at } = itemInfo;
   const [isEdit, setIsEdit] = useState(false);
   const [todo, setTodo] = useState(content);
   const dispatch = useDispatch();
@@ -45,14 +51,23 @@ const TodoItem = ({
     }
   };
 
+  const editTodos = () => {
+    if (!completed_at) {
+      setIsEdit(true);
+    }
+  };
+
   const cancelEdit = () => {
     setTodo(content);
     setIsEdit(false);
   };
 
   const deleteItem = () => {
-    console.log("?");
     dispatch(handleDelete(itemId));
+  };
+
+  const changeStatus = () => {
+    dispatch(handleChangeStatus(itemId));
   };
 
   return (
@@ -60,10 +75,18 @@ const TodoItem = ({
       {!isEdit ? (
         <>
           <div className="todo-flex todo-flex-1 todo-border-b todo-border-[#E5E5E5] todo-pb-4">
-            <img className="todo-cursor-pointer" src={checkbox} />
+            <img
+              className="todo-cursor-pointer"
+              src={completed_at ? tick : checkbox}
+              onClick={() => changeStatus()}
+            />
             <p
-              className="todo-pl-4 todo-mb-0 todo-cursor-pointer hover:todo-decoration-1 hover:todo-underline"
-              onClick={() => setIsEdit(true)}
+              className={`todo-pl-4 todo-font-baseFamily todo-mb-0 ${
+                completed_at
+                  ? "todo-line-through todo-text-[#9F9A91]"
+                  : "todo-cursor-pointer hover:todo-underline"
+              }`}
+              onClick={() => editTodos()}
             >
               {todo}
             </p>

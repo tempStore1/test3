@@ -5,6 +5,7 @@ export const createType = {
   MAIN_ADD_TODOS: "MAIN_ADD_TODOS",
   MAIN_PUT_TODOS: "MAIN_PUT_TODOS",
   MAIN_DELETE_TODOS: "MAIN_DELETE_TODOS",
+  MAIN_TODOS_CHANGE: "MAIN_TODOS_CHANGE",
 };
 
 export const userLogout = () => {
@@ -44,6 +45,13 @@ export const editTodos = (content: string, id: string) => {
 export const deleteTodos = (id: string) => {
   return {
     type: createType.MAIN_DELETE_TODOS,
+    id,
+  };
+};
+
+export const changeStatusTodos = (id: string) => {
+  return {
+    type: createType.MAIN_TODOS_CHANGE,
     id,
   };
 };

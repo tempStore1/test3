@@ -5,7 +5,13 @@ import Todo, { TodoModule } from "@/components/Todo";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodos, addTodos, editTodos, deleteTodos } from "./MainAction";
+import {
+  getTodos,
+  addTodos,
+  editTodos,
+  deleteTodos,
+  changeStatusTodos,
+} from "./MainAction";
 import type { RootState } from "@/store";
 
 const MainStyles = styled.div`
@@ -20,6 +26,12 @@ const MainStyles = styled.div`
   padding: 50px;
 `;
 MainStyles.displayName = "MainStyles";
+
+interface TodoItemType {
+  id: string;
+  content: string;
+  completed_at: string;
+}
 
 const Main: React.FC = () => {
   const [filterType, setFilterType] = useState("unfinished");
@@ -80,16 +92,16 @@ const Main: React.FC = () => {
                   完成
                 </Todo.Label>
               </Todo.FilterTypeBar>
-              {todos.map((item: any) => (
+              {todos.map((item: TodoItemType) => (
                 <Todo.TodoItem
                   key={item.id}
-                  itemId={item.id}
-                  content={item.content}
+                  itemInfo={item}
                   handleEdit={editTodos}
                   handleDelete={deleteTodos}
+                  handleChangeStatus={changeStatusTodos}
                 />
               ))}
-              <Todo.TodoFooter />
+              <Todo.TodoFooter todos={todos} deleteCompleted={deleteTodos} />
             </Todo.TodoBox>
           ) : (
             <Todo.NoTodos />

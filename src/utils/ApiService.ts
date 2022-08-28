@@ -117,6 +117,17 @@ const ApiService = {
         return error;
       });
   },
+  patch(url: string, data = {}) {
+    return instance
+      .patch(url, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        handleError(error.response);
+        return error;
+      });
+  },
 };
 
 export default ApiService;

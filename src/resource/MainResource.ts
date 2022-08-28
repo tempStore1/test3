@@ -20,10 +20,15 @@ const deleteTodos = (id: string) => {
   return ApiService.delete(`/todos/${id}`);
 };
 
+const changeStatusTodos = (id: string) => {
+  return ApiService.patch(`/todos/${id}/toggle`);
+};
+
 export default {
   userLogout,
   getTodos,
   addTodos,
   editTodos,
   deleteTodos,
+  changeStatusTodos,
 };
