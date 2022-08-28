@@ -2,7 +2,7 @@
 
 set -e
 
-npm run build:prod
+npm run build
 
 cd dist
 
